@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <input id=uno>
+  <script>
+    let codes = [
+      'Digit0',
+      'Digit1',
+      'Digit2',
+      'Digit3',
+      'Digit4',
+      'Digit5',
+      'Digit6',
+      'Digit7',
+      'Digit8',
+      'Digit9',
+      'Numpad0',
+      'Numpad1',
+      'Numpad2',
+      'Numpad3',
+      'Numpad4',
+      'Numpad5',
+      'Numpad6',
+      'Numpad7',
+      'Numpad8',
+      'Numpad9',
+      "Backspace",
+      'ArrowLeft',
+      "ArrowRight"
+    ]
+    function stopNonNumDown(e) {
+
+      const code = e.code
+
+      if (!codes.includes(code)) {
+        e.preventDefault()
+      }
+
+    }
+
+    function onInput(e) {
+      const value = e.target.value
+      if (value.includes('´')) {
+        const valueSinTildes = value.replace('´', '')
+        e.target.value = valueSinTildes
+      }
+    }
+
+    uno.onkeydown = stopNonNumDown;
+
+    uno.oninput = onInput;
+  </script>
+</body>
+
+</html>

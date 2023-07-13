@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <p>
+    DEPRECADO: Si yo capturo el evento de teclado onkeypress en un input y retorno un falso,
+    esa letra no aparece en el input.
+    <br>
+    Si la tecla que presionan es 'BracketLeft', que es la que utilizamos para poner
+    acentos, esta tecla cuando es presionada nunca llega al evento onkeypress.
+    <br>
+    Entonces existe otro evento onkeydown
+  </p>
+  <input id=uno>
+  <input id=dos>
+  <script>
+    let codes = [
+      'Digit0',
+      'Digit1',
+      'Digit2',
+      'Digit3',
+      'Digit4',
+      'Digit5',
+      'Digit6',
+      'Digit7',
+      'Digit8',
+      'Digit9',
+      'Numpad0',
+      'Numpad1',
+      'Numpad2',
+      'Numpad3',
+      'Numpad4',
+      'Numpad5',
+      'Numpad6',
+      'Numpad7',
+      'Numpad8',
+      'Numpad9',
+      "Backspace",
+      'ArrowLeft',
+      "ArrowRight"
+    ]
+    function stopNonNumDown(e) {
+      const code = e.code
+      console.log({
+        stopNonNumDown: 'stopNonNumDown',
+        code
+      })
+      // return false
+      if (!codes.includes(code)) {
+        e.preventDefault()
+      }
+      // dos.value=e.keyCode+'/'+e.shiftKey;
+      // if((
+      //   (e.shiftKey || (e.keyCode < 48 || e.keyCode > 57) && (e.keyCode < 96 || e.keyCode > 105))
+      //     && ((e.keyCode < 13 || e.keyCode > 13) && (e.keyCode < 8 || e.keyCode > 9)))
+      //     && ((e.keyCode < 37 || e.keyCode > 37)) || e.keyCode == 222 || e.keyCode == 186 || e.keyCode == 96)
+      // {
+      //   dos.value=dos.value+'-';
+      //   e.preventDefault();
+      // }else{
+      //   dos.value=dos.value+'+';
+      // }
+    }
+
+    function stopNonNumPress(e) {
+      const code = e.code
+      console.log({
+        stopNonNumPress: 'stopNonNumPress',
+        code
+      })
+      return true
+      if (!codes.includes(code)) {
+        // e.preventDefault()
+      }
+      // dos.value=e.keyCode+'/'+e.shiftKey;
+      // if((
+      //   (e.shiftKey || (e.keyCode < 48 || e.keyCode > 57) && (e.keyCode < 96 || e.keyCode > 105))
+      //     && ((e.keyCode < 13 || e.keyCode > 13) && (e.keyCode < 8 || e.keyCode > 9)))
+      //     && ((e.keyCode < 37 || e.keyCode > 37)) || e.keyCode == 222 || e.keyCode == 186 || e.keyCode == 96)
+      // {
+      //   dos.value=dos.value+'-';
+      //   e.preventDefault();
+      // }else{
+      //   dos.value=dos.value+'+';
+      // }
+    }
+
+    function stopNonNumUp(e) {
+      const code = e.code
+      console.log({
+        stopNonNumUp: 'stopNonNumUp',
+        code
+      })
+      return false
+    }
+
+    function onInput(e) {
+      console.log({
+        onInput: 'onInput',
+        e
+      })
+      const value = e.target.value
+      if (value.includes('´')) {
+        const valueSinTildes = value.replace('´', '')
+        console.log({ valueSinTildes })
+        e.target.value = valueSinTildes
+      }
+    }
+
+    uno.onkeydown = stopNonNumDown;
+    // uno.onkeypress=stopNonNumPress;
+    // uno.onkeyup=stopNonNumUp;
+    uno.oninput = onInput;
+  </script>
+</body>
+
+</html>

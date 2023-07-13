@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <p>16:17</p>
+  <p>16:32</p>
   <input id="uno" type="tel" inputmode="numeric">
   <script>
     let codes = [
@@ -46,15 +46,19 @@
 
     }
 
+    let expresionRegularSoloDigitos = /^\d*$/
+    let anterior = ''
+
     function onInput(e) {
-      const value = e.target.value
-      if (value.includes('´')) {
-        const valueSinTildes = value.replace('´', '')
-        e.target.value = valueSinTildes
+      const value = expresionRegularSoloDigitos.test( e.target.value )
+      if (!value) {
+        e.target.value = anterior
+      } else {
+        anterior = e.target.value
       }
     }
 
-    uno.onkeydown = stopNonNumDown;
+    // uno.onkeydown = stopNonNumDown;
 
     uno.oninput = onInput;
   </script>
